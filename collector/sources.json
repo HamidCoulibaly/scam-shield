@@ -1,0 +1,29 @@
+{
+  "output": "dist/scamlist.json",
+  "allowlist": "data/allowlist.csv",
+  "sources": [
+    {
+      "name": "my reports",
+      "type": "csv",
+      "path": "data/my_reports.csv",
+      "trust": "own"
+    },
+    {
+      "name": "tellows",
+      "type": "csv_url",
+      "url": "$TELLOWS_FEED_URL",
+      "enabled": false,
+      "_note": "Enable once you have tellows partner access. Set TELLOWS_FEED_URL as a secret. Expected columns: number, score, reports, reported_at."
+    }
+  ],
+  "rules": {
+    "block_score": 9,
+    "label_score": 7,
+    "min_reports": 3,
+    "max_age_days": 180,
+    "range_threshold": 3,
+    "range_action": "label",
+    "max_entries": 2000000,
+    "max_shrink": 0.5
+  }
+}
