@@ -9,6 +9,7 @@ settings:
     MARKETING_VERSION: "1.0"
     CURRENT_PROJECT_VERSION: "1"
     CODE_SIGN_STYLE: Automatic
+    DEVELOPMENT_TEAM: 59HVB48VNQ          # your Personal Team, so xcodegen keeps signing
     SWIFT_VERSION: "5.0"
 targets:
   ScamShield:
