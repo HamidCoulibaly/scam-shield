@@ -1,2 +1,3 @@
 collector/data/allowlist.csv
 __pycache__/
+ios/*.xcodeproj

@@ -1,0 +1,53 @@
+# XcodeGen spec. Generate the Xcode project with:  xcodegen
+name: ScamShield
+options:
+  bundleIdPrefix: com.hamidcoulibaly
+  deploymentTarget:
+    iOS: "17.0"
+settings:
+  base:
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    CODE_SIGN_STYLE: Automatic
+    SWIFT_VERSION: "5.0"
+targets:
+  ScamShield:
+    type: application
+    platform: iOS
+    sources: [App, Shared]
+    info:
+      path: App/Info.plist
+      properties:
+        CFBundleDisplayName: Scam Shield
+        UILaunchScreen: {}
+        NSContactsUsageDescription: Scam Shield reads phone numbers from your contacts so they are never blocked. They never leave this iPhone.
+        UIBackgroundModes: [fetch]
+        BGTaskSchedulerPermittedIdentifiers: [com.hamidcoulibaly.scamshield.refresh]
+        ScamListURL: https://raw.githubusercontent.com/HamidCoulibaly/scam-shield/main/collector/dist/scamlist.json
+    entitlements:
+      path: App/ScamShield.entitlements
+      properties:
+        com.apple.security.application-groups: [group.com.hamidcoulibaly.scamshield]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.hamidcoulibaly.scamshield
+    dependencies:
+      - target: CallBlock
+  CallBlock:
+    type: app-extension
+    platform: iOS
+    sources: [CallBlock, Shared]
+    info:
+      path: CallBlock/Info.plist
+      properties:
+        CFBundleDisplayName: Scam Shield
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.callkit.call-directory
+          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).CallDirectoryHandler
+    entitlements:
+      path: CallBlock/CallBlock.entitlements
+      properties:
+        com.apple.security.application-groups: [group.com.hamidcoulibaly.scamshield]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.hamidcoulibaly.scamshield.CallBlock
